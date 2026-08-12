@@ -4,24 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jeed Search - Person Finder</title>
-    <!-- ใช้ Tailwind CSS แต่งหน้าตาให้ทันสมัย -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Programmable Search Engine Code -->
-    <script async src="https://cse.google.com/cse.js?cx=42c947721c6b843dc"></script>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen p-6">
 
-    <div class="max-w-3xl mx-auto bg-slate-800 p-8 rounded-2xl shadow-xl border border-slate-700 mt-10">
-        <!-- Header -->
-        <div class="text-center mb-8">
+    <div class="max-w-2xl mx-auto bg-slate-800 p-8 rounded-2xl shadow-xl border border-slate-700 mt-10">
+        <div class="text-center mb-6">
             <h1 class="text-3xl font-bold text-blue-400 mb-2">🔍 Person Search</h1>
-            <p class="text-slate-400 text-sm">ระบบค้นหาข้อมูลและโปรไฟล์บุคคลจากชื่อ-นามสกุล</p>
+            <p class="text-slate-400 text-sm">ค้นหาข้อมูลและโปรไฟล์บุคคลจากทั่วทั้งอินเทอร์เน็ต</p>
         </div>
 
-        <!-- Google Custom Search Widget -->
-        <div class="gcse-search"></div>
+        <div class="flex flex-col sm:flex-row gap-3 mb-6">
+            <input type="text" id="searchInput" placeholder="พิมพ์ ชื่อ-นามสกุล..." 
+                   class="flex-1 p-3 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:border-blue-500 text-white"
+                   onkeypress="if(event.key === 'Enter') search()">
+            
+            <button onclick="search()" class="bg-blue-600 hover:bg-blue-500 px-6 py-3 rounded-xl font-medium transition-colors">
+                ค้นหาบน Google
+            </button>
+        </div>
+
+        <div class="text-xs text-slate-500 text-center">
+            * ระบบจะดึงผลการค้นหาโปรไฟล์สาธารณะจาก Google Search โดยตรง
+        </div>
     </div>
 
+    <script>
+        function search() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (!query) {
+                alert('กรุณากรอกชื่อ-นามสกุลก่อนค้นหา');
+                return;
+            }
+            // เปิดหน้าการค้นหาบน Google แท็บใหม่
+            window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, '_blank');
+        }
+    </script>
 </body>
 </html>
